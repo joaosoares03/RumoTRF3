@@ -1,33 +1,132 @@
 # Relatório de verificação de links
 
-Gerado em 2026-11-12T02:07:05.667Z por `npm run links:check`.
+Gerado em 2026-11-12T13:27:04.898Z por `npm run links:check`.
 
-- **INACESSIVEL**: 2
-- **VERIFICADO**: 72
+- **VERIFICADO**: 189
+- **INACESSIVEL**: 3
 
 | Status | HTTP | Recurso | Detalhe |
 |---|---|---|---|
+| VERIFICADO | 200 | [Angular — documentação oficial](https://angular.dev/overview) | OK |
+| VERIFICADO | 200 | [ANPD — Autoridade Nacional de Proteção de Dados](https://www.gov.br/anpd/pt-br) | OK |
+| VERIFICADO | 200 | [Maven — Introduction to the Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html) | OK |
+| VERIFICADO | 200 | [Apache Kafka — Introduction](https://kafka.apache.org/intro) | OK |
+| VERIFICADO | 200 | [Apache Tomcat](https://tomcat.apache.org/) | OK |
+| VERIFICADO | 200 | [Jira Service Management — documentação](https://support.atlassian.com/jira-service-management-cloud/) | OK |
+| VERIFICADO | 200 | [Ubuntu Server — documentação](https://documentation.ubuntu.com/server/) | OK |
+| VERIFICADO | 200 | [Cartilha de Segurança para Internet — CERT.br](https://cartilha.cert.br/) | OK |
+| VERIFICADO | 200 | [The Clean Architecture — Robert C. Martin (blog)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) | OK |
+| VERIFICADO | 200 | [Portaria CNJ nº 253/2020 — Diretrizes Técnicas da PDPJ-Br](https://atos.cnj.jus.br/atos/detalhar/3582) | OK |
+| VERIFICADO | 200 | [Resolução CNJ nº 351/2020 — Prevenção e Enfrentamento do Assédio e da Discriminação](https://atos.cnj.jus.br/atos/detalhar/3557) | OK |
+| VERIFICADO | 200 | [Resolução CNJ nº 335/2020 — Governança do processo judicial eletrônico e PDPJ-Br](https://atos.cnj.jus.br/atos/detalhar/3496) | OK |
+| VERIFICADO | 200 | [Resolução CNJ nº 396/2021 — Estratégia Nacional de Segurança Cibernética (ENSEC-PJ)](https://atos.cnj.jus.br/atos/detalhar/3975) | OK |
+| VERIFICADO | 200 | [Portaria CNJ nº 162/2021 — Protocolos e manuais da ENSEC-PJ](https://atos.cnj.jus.br/atos/detalhar/3982) | OK |
+| VERIFICADO | 200 | [Resolução CNJ nº 522/2023 — MoReq-Jus](https://atos.cnj.jus.br/atos/detalhar/5266) | OK |
+| VERIFICADO | 200 | [Portaria CNJ nº 252/2020 — Modelo de Governança da PDPJ-Br](https://atos.cnj.jus.br/atos/detalhar/3581) | OK |
+| VERIFICADO | 200 | [Portaria CNJ nº 131/2021 — Grupo Revisor de Código-Fonte da PDPJ-Br e do PJe](https://atos.cnj.jus.br/atos/detalhar/3915) | OK |
+| VERIFICADO | 200 | [Resolução CNJ nº 433/2021 — Política Nacional do Poder Judiciário para o Meio Ambiente](https://atos.cnj.jus.br/atos/detalhar/4214) | OK |
+| VERIFICADO | 200 | [Resolução CNJ nº 410/2021 — Sistemas de Integridade do Poder Judiciário](https://atos.cnj.jus.br/atos/detalhar/4073) | OK |
+| VERIFICADO | 200 | [Resolução CNJ nº 401/2021 — Acessibilidade e inclusão de pessoas com deficiência no Judiciário](https://atos.cnj.jus.br/atos/detalhar/3987) | OK |
+| VERIFICADO | 200 | [The Debian Administrator's Handbook (pt-BR)](https://debian-handbook.info/browse/pt-BR/stable/) | OK |
+| VERIFICADO | 200 | [Django — documentação](https://docs.djangoproject.com/en/stable/) | OK |
+| VERIFICADO | 200 | [Docker — Get started](https://docs.docker.com/get-started/) | OK |
+| VERIFICADO | 200 | [Dockerfile reference](https://docs.docker.com/reference/dockerfile/) | OK |
+| VERIFICADO | 200 | [Doctrine ORM](https://www.doctrine-project.org/projects/orm.html) | OK |
+| VERIFICADO | 200 | [Jakarta Persistence (JPA) — especificação](https://jakarta.ee/specifications/persistence/) | OK |
+| VERIFICADO | 200 | [Jakarta Faces (JSF) — especificação](https://jakarta.ee/specifications/faces/) | OK |
+| VERIFICADO | 200 | [Página oficial do concurso na Fundação Vunesp (TRFT2601)](https://www.vunesp.com.br/TRFT2601) | OK |
+| VERIFICADO | 200 | [Pro Git (livro gratuito, pt-BR)](https://git-scm.com/book/pt-br/v2) | OK |
+| VERIFICADO | 200 | [eMAG — Modelo de Acessibilidade em Governo Eletrônico](https://emag.governoeletronico.gov.br/) | OK |
+| VERIFICADO | 200 | [Aprenda GraphQL](https://graphql.org/learn/) | OK |
+| VERIFICADO | 200 | [Hibernate ORM — documentação](https://hibernate.org/orm/documentation/) | OK |
+| VERIFICADO | 200 | [Hibernate Envers](https://hibernate.org/orm/envers/) | OK |
+| VERIFICADO | 200 | [RFC 9293 — Transmission Control Protocol (TCP)](https://www.rfc-editor.org/rfc/rfc9293) | OK |
+| VERIFICADO | 200 | [RFC 1918 — Address Allocation for Private Internets](https://www.rfc-editor.org/rfc/rfc1918) | OK |
+| VERIFICADO | 200 | [RFC 2131 — Dynamic Host Configuration Protocol](https://www.rfc-editor.org/rfc/rfc2131) | OK |
+| INACESSIVEL | 429 | [RFC 9110 — HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110) | HTTP 429 |
+| VERIFICADO | 200 | [ITI — Certificação digital ICP-Brasil](https://www.gov.br/iti/pt-br) | OK |
+| VERIFICADO | 200 | [jBPM — site oficial](https://www.jbpm.org/) | OK |
+| VERIFICADO | 200 | [Keycloak — documentação](https://www.keycloak.org/documentation) | OK |
+| VERIFICADO | 200 | [Dimensional Modeling Techniques — Kimball Group](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/) | OK |
+| VERIFICADO | 200 | [Kubernetes — Pods (pt-BR)](https://kubernetes.io/pt-br/docs/concepts/workloads/pods/) | OK |
+| VERIFICADO | 200 | [Continuous Integration — Martin Fowler](https://martinfowler.com/articles/continuousIntegration.html) | OK |
+| VERIFICADO | 200 | [Códigos de status de respostas HTTP — MDN](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status) | OK |
+| VERIFICADO | 200 | [box-sizing — MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/CSS/box-sizing) | OK |
+| VERIFICADO | 200 | [CSS — MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/CSS) | OK |
+| VERIFICADO | 200 | [Métodos de requisição HTTP — MDN](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Methods) | OK |
+| VERIFICADO | 200 | [Guia de JavaScript — MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide) | OK |
+| VERIFICADO | 200 | [HTML — MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/HTML) | OK |
+| VERIFICADO | 200 | [Requisitos do sistema do Windows 11](https://www.microsoft.com/pt-br/windows/windows-11-specifications) | OK |
+| VERIFICADO | 200 | [Serviços de Área de Trabalho Remota — Microsoft Learn](https://learn.microsoft.com/pt-br/windows-server/remote/remote-desktop-services/remote-desktop-services-overview) | OK |
+| VERIFICADO | 200 | [Controle de Conta de Usuário (UAC) — Microsoft Learn](https://learn.microsoft.com/pt-br/windows/security/application-security/application-control/user-account-control/) | OK |
+| VERIFICADO | 200 | [Comando ipconfig — Microsoft Learn](https://learn.microsoft.com/pt-br/windows-server/administration/windows-commands/ipconfig) | OK |
+| VERIFICADO | 200 | [TOP (Transact-SQL) — Microsoft Learn](https://learn.microsoft.com/pt-br/sql/t-sql/queries/top-transact-sql) | OK |
+| VERIFICADO | 200 | [Comando netstat — Microsoft Learn](https://learn.microsoft.com/pt-br/windows-server/administration/windows-commands/netstat) | OK |
+| VERIFICADO | 200 | [Documentação do C# — Microsoft Learn](https://learn.microsoft.com/pt-br/dotnet/csharp/) | OK |
+| VERIFICADO | 200 | [Instrução using (C#) — Microsoft Learn](https://learn.microsoft.com/pt-br/dotnet/csharp/language-reference/statements/using) | OK |
+| VERIFICADO | 200 | [Comando nslookup — Microsoft Learn](https://learn.microsoft.com/pt-br/windows-server/administration/windows-commands/nslookup) | OK |
+| VERIFICADO | 200 | [Comando gpresult — Microsoft Learn](https://learn.microsoft.com/pt-br/windows-server/administration/windows-commands/gpresult) | OK |
+| VERIFICADO | 200 | [Como o SharePoint e o OneDrive interagem com o Microsoft Teams](https://learn.microsoft.com/pt-br/microsoftteams/sharepoint-onedrive-interact) | OK |
+| VERIFICADO | 200 | [Comando net user — Microsoft Learn](https://learn.microsoft.com/pt-br/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc771865(v=ws.11)) | OK |
+| VERIFICADO | 200 | [Windows Server Update Services (WSUS) — Microsoft Learn](https://learn.microsoft.com/pt-br/windows-server/administration/windows-server-update-services/get-started/windows-server-update-services-wsus) | OK |
+| VERIFICADO | 200 | [Entity Framework Core — Microsoft Learn](https://learn.microsoft.com/pt-br/ef/core/) | OK |
+| VERIFICADO | 200 | [Migrações no EF Core — Microsoft Learn](https://learn.microsoft.com/pt-br/ef/core/managing-schemas/migrations/) | OK |
+| VERIFICADO | 200 | [Firewall do Windows — Microsoft Learn](https://learn.microsoft.com/pt-br/windows/security/operating-system-security/network-security/windows-firewall/) | OK |
+| VERIFICADO | 200 | [Microsoft Intune — visão geral](https://learn.microsoft.com/pt-br/mem/intune/fundamentals/what-is-intune) | OK |
+| VERIFICADO | 200 | [Visão geral do BitLocker — Microsoft Learn](https://learn.microsoft.com/pt-br/windows/security/operating-system-security/data-protection/bitlocker/) | OK |
+| VERIFICADO | 200 | [Objetivos de Desenvolvimento Sustentável — ONU Brasil](https://brasil.un.org/pt-br/sdgs) | OK |
+| VERIFICADO | 200 | [Netflix Hystrix — Wiki (How it Works)](https://github.com/Netflix/Hystrix/wiki) | OK |
+| VERIFICADO | 200 | [Nginx — módulo ngx_http_proxy_module](https://nginx.org/en/docs/http/ngx_http_proxy_module.html) | OK |
+| VERIFICADO | 200 | [10 Usability Heuristics — Nielsen Norman Group](https://www.nngroup.com/articles/ten-usability-heuristics/) | OK |
+| VERIFICADO | 200 | [BPMN 2.0 — especificação OMG](https://www.omg.org/spec/BPMN/2.0/) | OK |
+| VERIFICADO | 200 | [OpenAPI Specification (última versão)](https://spec.openapis.org/oas/latest.html) | OK |
+| VERIFICADO | 200 | [Aprenda Node.js — site oficial](https://nodejs.org/en/learn) | OK |
+| VERIFICADO | 200 | [Learn Java — dev.java](https://dev.java/learn/) | OK |
+| VERIFICADO | 200 | [OWASP — SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html) | OK |
+| VERIFICADO | 200 | [OWASP Top 10:2021](https://owasp.org/Top10/) | OK |
+| VERIFICADO | 200 | [Manual do PHP](https://www.php.net/manual/pt_BR/) | OK |
+| VERIFICADO | 200 | [PHP 8.0 — anúncio de lançamento](https://www.php.net/releases/8.0/pt_BR.php) | OK |
+| VERIFICADO | 200 | [Lei nº 12.527/2011 — Lei de Acesso à Informação](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 14.230/2021 — altera a Lei de Improbidade Administrativa](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14230.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 14.364/2022](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14364.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 8.429/1992 — Lei de Improbidade Administrativa](https://www.planalto.gov.br/ccivil_03/leis/l8429.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 9.784/1999 — Processo Administrativo Federal](https://www.planalto.gov.br/ccivil_03/leis/l9784.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 12.846/2013 — Lei Anticorrupção](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12846.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 12.187/2009 — Política Nacional sobre Mudança do Clima](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l12187.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 14.133/2021 — Licitações e Contratos Administrativos](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14133.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 7.853/1989 — Apoio às pessoas com deficiência e sua integração social](https://www.planalto.gov.br/ccivil_03/leis/l7853.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 8.112/1990 — Regime Jurídico dos Servidores Públicos Civis da União (texto compilado)](https://www.planalto.gov.br/ccivil_03/leis/l8112cons.htm) | OK |
+| VERIFICADO | 200 | [Decreto nº 5.296/2004 — Regulamenta as Leis 10.048 e 10.098](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/decreto/d5296.htm) | OK |
+| VERIFICADO | 200 | [Constituição da República Federativa do Brasil de 1988](https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm) | OK |
+| VERIFICADO | 200 | [Decreto nº 3.298/1999 — Política Nacional para a Integração da Pessoa Portadora de Deficiência](https://www.planalto.gov.br/ccivil_03/decreto/d3298.htm) | OK |
+| VERIFICADO | 200 | [Decreto nº 6.949/2009 — Convenção sobre os Direitos das Pessoas com Deficiência](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/decreto/d6949.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 13.146/2015 — Estatuto da Pessoa com Deficiência (LBI)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 13.709/2018 — Lei Geral de Proteção de Dados Pessoais (LGPD)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 11.126/2005 — Direito de ingresso com cão-guia](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11126.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 10.098/2000 — Normas gerais de acessibilidade](https://www.planalto.gov.br/ccivil_03/leis/l10098.htm) | OK |
+| VERIFICADO | 200 | [Lei nº 10.048/2000 — Prioridade de atendimento](https://www.planalto.gov.br/ccivil_03/leis/l10048.htm) | OK |
+| VERIFICADO | 200 | [PostgreSQL — SELECT](https://www.postgresql.org/docs/current/sql-select.html) | OK |
+| VERIFICADO | 200 | [PostgreSQL — Tutorial](https://www.postgresql.org/docs/current/tutorial.html) | OK |
+| VERIFICADO | 200 | [PostgreSQL — JSON Types](https://www.postgresql.org/docs/current/datatype-json.html) | OK |
 | INACESSIVEL | - | [Manual de Redação da Presidência da República](https://www4.planalto.gov.br/centrodeestudos/assuntos/manual-de-redacao-da-presidencia-da-republica) | fetch failed |
 | INACESSIVEL | 403 | [PrimeFaces — showcase de componentes](https://www.primefaces.org/showcase/) | HTTP 403 |
-| VERIFICADO | 200 | [Vídeo do YouTube 5uMooAjtVis (aguardando verificação)](https://www.youtube.com/watch?v=5uMooAjtVis) | oEmbed: "CRASE - As 6 regras mais cobradas em CONCURSO (Teoria + Questões)" (Prof. Álvaro Ferreira) |
-| VERIFICADO | 200 | [Vídeo do YouTube jdqhnVUvqOc (aguardando verificação)](https://www.youtube.com/watch?v=jdqhnVUvqOc) | oEmbed: "🔴 CONCORDÂNCIA VERBAL - Teoria e Questões para Concurso" (Prof. Álvaro Ferreira) |
-| VERIFICADO | 200 | [Vídeo do YouTube 1IRO-p95oo0 (aguardando verificação)](https://www.youtube.com/watch?v=1IRO-p95oo0) | oEmbed: "REGÊNCIA VERBAL E NOMINAL - Muitos exemplos e questões" (Prof. Álvaro Ferreira) |
-| VERIFICADO | 200 | [Vídeo do YouTube mwesr5YGr9o (aguardando verificação)](https://www.youtube.com/watch?v=mwesr5YGr9o) | oEmbed: "Uso da Vírgula - Regras mais cobradas em concurso (Nunca mais erre!)" (Prof. Álvaro Ferreira) |
-| VERIFICADO | 200 | [Vídeo do YouTube 22iA3PPjr7c (aguardando verificação)](https://www.youtube.com/watch?v=22iA3PPjr7c) | oEmbed: "INTERPRETAÇÃO de TEXTOS para CONCURSO - Nunca mais erre!" (Prof. Álvaro Ferreira) |
-| VERIFICADO | 200 | [Vídeo do YouTube zTe7izGQ8-4 (aguardando verificação)](https://www.youtube.com/watch?v=zTe7izGQ8-4) | oEmbed: "FIGURAS DE LINGUAGEM: Aula COMPLETA para Você NÃO Errar Mais!" (Português sem Enrolação - Professora Lis) |
-| VERIFICADO | 200 | [Vídeo do YouTube VISNlsOGdxU (aguardando verificação)](https://www.youtube.com/watch?v=VISNlsOGdxU) | oEmbed: "AULA 1 - REDAÇÃO OFICIAL PARA CONCURSOS - Manual  de Redação da Presidência da República" (JUS POLIS) |
-| VERIFICADO | 200 | [Vídeo do YouTube b-Ei8KMCtjQ (aguardando verificação)](https://www.youtube.com/watch?v=b-Ei8KMCtjQ) | oEmbed: "As falácias na argumentação - Brasil Escola" (Brasil Escola Oficial) |
-| VERIFICADO | 200 | [Vídeo do YouTube IEdNjbJJQq0 (aguardando verificação)](https://www.youtube.com/watch?v=IEdNjbJJQq0) | oEmbed: "REDAÇÃO para CONCURSO - Guia completo com passo a passo" (Prof. Álvaro Ferreira) |
-| VERIFICADO | 200 | [Vídeo do YouTube QjCfztjwzZ8 (aguardando verificação)](https://www.youtube.com/watch?v=QjCfztjwzZ8) | oEmbed: "Como escrever QUALQUER REDAÇÃO da banca VUNESP do ZERO / PASSO a PASSO SIMPLES e SEM ENROLAÇÃO" (Prof. Ramai / Redação ) |
-| VERIFICADO | 200 | [Vídeo do YouTube GcfbBQYaals (aguardando verificação)](https://www.youtube.com/watch?v=GcfbBQYaals) | oEmbed: "Equivalências Lógicas Para Concursos" (Felippe Loureiro) |
-| VERIFICADO | 200 | [Vídeo do YouTube sJ607Nw8R7A (aguardando verificação)](https://www.youtube.com/watch?v=sJ607Nw8R7A) | oEmbed: "Raciocínio Lógico para Concursos - ⁠Negação Lógica" (Felippe Loureiro) |
-| VERIFICADO | 200 | [Vídeo do YouTube S0nPZnq7ApM (aguardando verificação)](https://www.youtube.com/watch?v=S0nPZnq7ApM) | oEmbed: "Matemática Para Concursos: Como Aprender Porcentagem Passo a Passo" (Felippe Loureiro) |
-| VERIFICADO | 200 | [Vídeo do YouTube CQFFaa9fmS0 (aguardando verificação)](https://www.youtube.com/watch?v=CQFFaa9fmS0) | oEmbed: "REGRA DE TRÊS SIMPLES E COMPOSTA / RESUMÃO /" (Gis com Giz) |
-| VERIFICADO | 200 | [Vídeo do YouTube HcQiY8lXsps (aguardando verificação)](https://www.youtube.com/watch?v=HcQiY8lXsps) | oEmbed: "Curso Gratuito / Lei 8.112/1990 Esquematizada para Concursos: Resumo Geral" (Gran Cursos Online) |
-| VERIFICADO | 200 | [Vídeo do YouTube zHeWj-GwiWc (aguardando verificação)](https://www.youtube.com/watch?v=zHeWj-GwiWc) | oEmbed: "“Nova” Lei de IMPROBIDADE ADMINISTRATIVA (RESUMO) - Lei 8.429/92 ATUALIZADA (após mudanças)" (Me Julga - Cíntia Brunelli) |
-| VERIFICADO | 200 | [Vídeo do YouTube VEOAXMi4e5I (aguardando verificação)](https://www.youtube.com/watch?v=VEOAXMi4e5I) | oEmbed: "LEI ANTICORRUPÇÃO (Lei 12.846/13) - Resumo para Concursos" (Me Julga - Cíntia Brunelli) |
-| VERIFICADO | 200 | [Vídeo do YouTube nx7_8aHuEFo (aguardando verificação)](https://www.youtube.com/watch?v=nx7_8aHuEFo) | oEmbed: "Curso Gratuito / Lei 9.784/1999 Esquematizada para Concursos: Parte Geral / Rodrigo Cardoso" (Gran Cursos Online) |
-| VERIFICADO | 200 | [Vídeo do YouTube XbuniaIh_Tc (aguardando verificação)](https://www.youtube.com/watch?v=XbuniaIh_Tc) | oEmbed: "Lei nº 13.709 de 2018 - Lei Geral de Proteção de Dados (LGPD) - Conceitos e Características" (Professor Raphael Pinho) |
+| VERIFICADO | 200 | [Tutorial oficial de Python (pt-BR)](https://docs.python.org/pt-br/3/tutorial/index.html) | OK |
+| VERIFICADO | 200 | [RabbitMQ — AMQP 0-9-1 Model Explained](https://www.rabbitmq.com/tutorials/amqp-concepts) | OK |
+| VERIFICADO | 200 | [useEffect — referência do React](https://react.dev/reference/react/useEffect) | OK |
+| VERIFICADO | 200 | [Aprenda React (pt-BR)](https://pt-br.react.dev/learn) | OK |
+| VERIFICADO | 200 | [Flyway — documentação](https://documentation.red-gate.com/flyway) | OK |
+| VERIFICADO | 200 | [Redis — comando EXPIRE](https://redis.io/docs/latest/commands/expire/) | OK |
+| VERIFICADO | 200 | [Padrões de projeto — Refactoring.Guru (pt-BR)](https://refactoring.guru/pt-br/design-patterns) | OK |
+| VERIFICADO | 200 | [Spring Framework — The IoC Container](https://docs.spring.io/spring-framework/reference/core/beans.html) | OK |
+| VERIFICADO | 200 | [Spring Cloud Netflix (Eureka, Zuul, Hystrix)](https://spring.io/projects/spring-cloud-netflix) | OK |
+| VERIFICADO | 200 | [Spring Boot — documentação de referência](https://docs.spring.io/spring-boot/index.html) | OK |
+| VERIFICADO | 200 | [GLPI — documentação do usuário](https://glpi-user-documentation.readthedocs.io/) | OK |
+| VERIFICADO | 200 | [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) | OK |
+| VERIFICADO | 200 | [Declaração Universal dos Direitos Humanos (texto em português)](https://www.unicef.org/brazil/declaracao-universal-dos-direitos-humanos) | OK |
+| VERIFICADO | 200 | [A successful Git branching model (Gitflow)](https://nvie.com/posts/a-successful-git-branching-model/) | OK |
+| VERIFICADO | 200 | [Vue.js — guia introdutório (pt)](https://pt.vuejs.org/guide/introduction.html) | OK |
+| VERIFICADO | 200 | [WCAG 2.2 — W3C Recommendation](https://www.w3.org/TR/WCAG22/) | OK |
+| VERIFICADO | 200 | [WildFly — documentação](https://docs.wildfly.org/) | OK |
 | VERIFICADO | 200 | [Vídeo do YouTube 4pmxaESSBKw (aguardando verificação)](https://www.youtube.com/watch?v=4pmxaESSBKw) | oEmbed: "LEI DE ACESSO À INFORMAÇÃO (Lei 12.527) - RESUMO da LAI - Sigilo 100 anos" (Me Julga - Cíntia Brunelli) |
 | VERIFICADO | 200 | [Vídeo do YouTube ETtAvAcLEFA (aguardando verificação)](https://www.youtube.com/watch?v=ETtAvAcLEFA) | oEmbed: "AULA 01 - ÉTICA no SERVIÇO PÚBLICO (para QUALQUER CONCURSO)" (FAZ QUESTÃO CONCURSOS PÚBLICOS) |
 | VERIFICADO | 200 | [Vídeo do YouTube sctA6VSPmVc (aguardando verificação)](https://www.youtube.com/watch?v=sctA6VSPmVc) | oEmbed: "Estatuto da Pessoa com Deficiência em 30 minutos: o que cai nas provas de concurso?" (Ricardo Torques) |
@@ -80,4 +179,23 @@ Gerado em 2026-11-12T02:07:05.667Z por `npm run links:check`.
 | VERIFICADO | 200 | [Vídeo do YouTube YKM_RNZb00E (aguardando verificação)](https://www.youtube.com/watch?v=YKM_RNZb00E) | oEmbed: "ITIL Foundation: Aprenda Tudo sobre ITIL!" (Renê Chiari / ITSM na Pratica) |
 | VERIFICADO | 200 | [Vídeo do YouTube 07fcqUg4Lv0 (aguardando verificação)](https://www.youtube.com/watch?v=07fcqUg4Lv0) | oEmbed: "ITIL®4 Incident Management elevando seu Gerenciamento de Incidentes ao Nível Máximo #ITIL #ITIL4 #TI" (Prof. Adriano Martins Antonio) |
 | VERIFICADO | 200 | [Vídeo do YouTube sfZ78441w90 (aguardando verificação)](https://www.youtube.com/watch?v=sfZ78441w90) | oEmbed: "ICP-Brasil e certificado digital" (Dicionário de Informática) |
+| VERIFICADO | 200 | [Vídeo do YouTube 1IRO-p95oo0 (aguardando verificação)](https://www.youtube.com/watch?v=1IRO-p95oo0) | oEmbed: "REGÊNCIA VERBAL E NOMINAL - Muitos exemplos e questões" (Prof. Álvaro Ferreira) |
 | VERIFICADO | 200 | [Vídeo do YouTube bS2gH-TvKyY (aguardando verificação)](https://www.youtube.com/watch?v=bS2gH-TvKyY) | oEmbed: "GLPI First Steps" (Synapse Software) |
+| VERIFICADO | 200 | [Vídeo do YouTube 5uMooAjtVis (aguardando verificação)](https://www.youtube.com/watch?v=5uMooAjtVis) | oEmbed: "CRASE - As 6 regras mais cobradas em CONCURSO (Teoria + Questões)" (Prof. Álvaro Ferreira) |
+| VERIFICADO | 200 | [Vídeo do YouTube jdqhnVUvqOc (aguardando verificação)](https://www.youtube.com/watch?v=jdqhnVUvqOc) | oEmbed: "🔴 CONCORDÂNCIA VERBAL - Teoria e Questões para Concurso" (Prof. Álvaro Ferreira) |
+| VERIFICADO | 200 | [Vídeo do YouTube mwesr5YGr9o (aguardando verificação)](https://www.youtube.com/watch?v=mwesr5YGr9o) | oEmbed: "Uso da Vírgula - Regras mais cobradas em concurso (Nunca mais erre!)" (Prof. Álvaro Ferreira) |
+| VERIFICADO | 200 | [Vídeo do YouTube 22iA3PPjr7c (aguardando verificação)](https://www.youtube.com/watch?v=22iA3PPjr7c) | oEmbed: "INTERPRETAÇÃO de TEXTOS para CONCURSO - Nunca mais erre!" (Prof. Álvaro Ferreira) |
+| VERIFICADO | 200 | [Vídeo do YouTube zTe7izGQ8-4 (aguardando verificação)](https://www.youtube.com/watch?v=zTe7izGQ8-4) | oEmbed: "FIGURAS DE LINGUAGEM: Aula COMPLETA para Você NÃO Errar Mais!" (Português sem Enrolação - Professora Lis) |
+| VERIFICADO | 200 | [Vídeo do YouTube VISNlsOGdxU (aguardando verificação)](https://www.youtube.com/watch?v=VISNlsOGdxU) | oEmbed: "AULA 1 - REDAÇÃO OFICIAL PARA CONCURSOS - Manual  de Redação da Presidência da República" (JUS POLIS) |
+| VERIFICADO | 200 | [Vídeo do YouTube b-Ei8KMCtjQ (aguardando verificação)](https://www.youtube.com/watch?v=b-Ei8KMCtjQ) | oEmbed: "As falácias na argumentação - Brasil Escola" (Brasil Escola Oficial) |
+| VERIFICADO | 200 | [Vídeo do YouTube IEdNjbJJQq0 (aguardando verificação)](https://www.youtube.com/watch?v=IEdNjbJJQq0) | oEmbed: "REDAÇÃO para CONCURSO - Guia completo com passo a passo" (Prof. Álvaro Ferreira) |
+| VERIFICADO | 200 | [Vídeo do YouTube QjCfztjwzZ8 (aguardando verificação)](https://www.youtube.com/watch?v=QjCfztjwzZ8) | oEmbed: "Como escrever QUALQUER REDAÇÃO da banca VUNESP do ZERO / PASSO a PASSO SIMPLES e SEM ENROLAÇÃO" (Prof. Ramai / Redação ) |
+| VERIFICADO | 200 | [Vídeo do YouTube GcfbBQYaals (aguardando verificação)](https://www.youtube.com/watch?v=GcfbBQYaals) | oEmbed: "Equivalências Lógicas Para Concursos" (Felippe Loureiro) |
+| VERIFICADO | 200 | [Vídeo do YouTube sJ607Nw8R7A (aguardando verificação)](https://www.youtube.com/watch?v=sJ607Nw8R7A) | oEmbed: "Raciocínio Lógico para Concursos - ⁠Negação Lógica" (Felippe Loureiro) |
+| VERIFICADO | 200 | [Vídeo do YouTube S0nPZnq7ApM (aguardando verificação)](https://www.youtube.com/watch?v=S0nPZnq7ApM) | oEmbed: "Matemática Para Concursos: Como Aprender Porcentagem Passo a Passo" (Felippe Loureiro) |
+| VERIFICADO | 200 | [Vídeo do YouTube CQFFaa9fmS0 (aguardando verificação)](https://www.youtube.com/watch?v=CQFFaa9fmS0) | oEmbed: "REGRA DE TRÊS SIMPLES E COMPOSTA / RESUMÃO /" (Gis com Giz) |
+| VERIFICADO | 200 | [Vídeo do YouTube HcQiY8lXsps (aguardando verificação)](https://www.youtube.com/watch?v=HcQiY8lXsps) | oEmbed: "Curso Gratuito / Lei 8.112/1990 Esquematizada para Concursos: Resumo Geral" (Gran Cursos Online) |
+| VERIFICADO | 200 | [Vídeo do YouTube zHeWj-GwiWc (aguardando verificação)](https://www.youtube.com/watch?v=zHeWj-GwiWc) | oEmbed: "“Nova” Lei de IMPROBIDADE ADMINISTRATIVA (RESUMO) - Lei 8.429/92 ATUALIZADA (após mudanças)" (Me Julga - Cíntia Brunelli) |
+| VERIFICADO | 200 | [Vídeo do YouTube VEOAXMi4e5I (aguardando verificação)](https://www.youtube.com/watch?v=VEOAXMi4e5I) | oEmbed: "LEI ANTICORRUPÇÃO (Lei 12.846/13) - Resumo para Concursos" (Me Julga - Cíntia Brunelli) |
+| VERIFICADO | 200 | [Vídeo do YouTube nx7_8aHuEFo (aguardando verificação)](https://www.youtube.com/watch?v=nx7_8aHuEFo) | oEmbed: "Curso Gratuito / Lei 9.784/1999 Esquematizada para Concursos: Parte Geral / Rodrigo Cardoso" (Gran Cursos Online) |
+| VERIFICADO | 200 | [Vídeo do YouTube XbuniaIh_Tc (aguardando verificação)](https://www.youtube.com/watch?v=XbuniaIh_Tc) | oEmbed: "Lei nº 13.709 de 2018 - Lei Geral de Proteção de Dados (LGPD) - Conceitos e Características" (Professor Raphael Pinho) |
