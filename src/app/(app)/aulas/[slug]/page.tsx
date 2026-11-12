@@ -6,8 +6,17 @@ import { Markdown, tocFromMarkdown } from "@/components/markdown";
 import { LessonTools } from "@/components/lesson-tools";
 import { QuestionPlayer } from "@/components/question-player";
 import { loadPlayerQuestions } from "@/lib/questions";
-import { Badge, Card, CardBody, PageHeader } from "@/components/ui";
+import { PlayCircle } from "lucide-react";
+import { Badge, Card, CardBody, CardHeader, PageHeader } from "@/components/ui";
+import { VideoGallery, type GalleryVideo } from "@/components/video-gallery";
 import { formatDate } from "@/lib/utils";
+
+/** Títulos verificados vêm no formato "Título — Canal" (oEmbed). */
+function splitTitle(title: string, provider: string): [string, string] {
+  const i = title.lastIndexOf(" — ");
+  if (i > 0) return [title.slice(0, i), title.slice(i + 3)];
+  return [title, provider.replace(/^YouTube · /, "")];
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -28,7 +37,24 @@ export default async function AulaPage({ params }: { params: Promise<{ slug: str
   });
   if (!lesson || lesson.status !== "PUBLICADO") notFound();
   const toc = tocFromMarkdown(lesson.content);
-  const fix = await loadPlayerQuestions(user.id, { topicId: { in: [lesson.topicId, ...(await db.lessonCoverage.findMany({ where: { lessonId: lesson.id }, select: { topicId: true } })).map((c) => c.topicId)] }, status: "PUBLICADO" }, 5, false);
+  const coveredIds = (await db.lessonCoverage.findMany({ where: { lessonId: lesson.id }, select: { topicId: true } })).map((c) => c.topicId);
+  const topicIds = [lesson.topicId, ...coveredIds];
+  const fix = await loadPlayerQuestions(user.id, { topicId: { in: topicIds }, status: "PUBLICADO" }, 5, false);
+
+  // videoaulas verificadas: primeiro as do assunto principal, depois as dos assuntos que a aula também trata
+  const videoLinks = await db.resourceTopic.findMany({
+    where: { topicId: { in: topicIds }, resource: { type: "VIDEO", status: "PUBLICADO", verificationStatus: "VERIFICADO" } },
+    include: { resource: true, topic: { select: { title: true } } },
+  });
+  const seen = new Set<string>();
+  const videos: GalleryVideo[] = videoLinks
+    .sort((a, b) => topicIds.indexOf(a.topicId) - topicIds.indexOf(b.topicId))
+    .filter((v) => (seen.has(v.resourceId) ? false : (seen.add(v.resourceId), true)))
+    .slice(0, 8)
+    .map((v) => {
+      const [title, channel] = splitTitle(v.resource.title, v.resource.provider);
+      return { id: v.resourceId, url: v.resource.url, title, channel, topic: v.topic.title, primary: v.topicId === lesson.topicId };
+    });
   const p = lesson.progress[0];
   // aulas da mesma disciplina para navegação
   const siblings = await db.lesson.findMany({
@@ -43,6 +69,7 @@ export default async function AulaPage({ params }: { params: Promise<{ slug: str
       <nav className="hidden xl:block" aria-label="Sumário da aula">
         <div className="sticky top-20 space-y-1 text-sm">
           <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Sumário</div>
+          {videos.length > 0 && <a href="#videoaula" className="block rounded-lg px-2 py-1 text-muted hover:bg-surface-2 hover:text-text">Videoaula</a>}
           {toc.map((h) => (
             <a key={h.id} href={`#${h.id}`} className={`block truncate rounded-lg px-2 py-1 text-muted hover:bg-surface-2 hover:text-text ${h.level === 3 ? "pl-5 text-xs" : ""}`}>
               {h.text}
@@ -68,6 +95,18 @@ export default async function AulaPage({ params }: { params: Promise<{ slug: str
             </span>
           }
         />
+        {videos.length > 0 && (
+          <Card id="videoaula" className="mb-6 scroll-mt-20">
+            <CardHeader
+              title="Videoaula"
+              subtitle={videos.length > 1 ? `${videos.length} vídeos sobre o conteúdo desta aula — escolha abaixo` : "Assista antes ou depois da leitura"}
+              icon={<PlayCircle className="size-4" />}
+            />
+            <CardBody>
+              <VideoGallery videos={videos} />
+            </CardBody>
+          </Card>
+        )}
         <Card>
           <CardBody className="p-6 sm:p-8" id="lesson-body">
             <Markdown>{lesson.content}</Markdown>

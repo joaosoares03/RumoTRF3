@@ -24,7 +24,7 @@ Atualizado em 11/11/2026.
 - [x] Tema claro/escuro, layout responsivo (verificado sem rolagem horizontal em 375 px), acessibilidade básica (rótulos, foco visível, navegação por teclado no planejador e nos flashcards, `prefers-reduced-motion`)
 
 ## Em desenvolvimento / pendências
-- [ ] Videoaulas: nenhuma cadastrada (exigem verificação de título/canal; fluxo pronto no painel via oEmbed)
+- [x] Videoaulas: catálogo em `content/videos.ts`, título/canal confirmados por oEmbed; exibidas na página do assunto e no topo de cada aula (player + lista para alternar). Cobertura medida em 12/11/2026 com `npx tsx scripts/video-coverage.ts`: 52/52 aulas com vídeo verificado do assunto principal
 - [ ] Materiais verificados para assuntos de Língua Portuguesa/RLM (não há documentação oficial por tópico; considerar materiais educacionais abertos)
 - [ ] Textos oficiais não verificados: Portaria PRES nº 4.657/2026 e Resolução PRES nº 426/2021 (site do TRF3 não acessível pelo verificador), Portaria CNJ nº 116/2012, Resoluções CJF nº 147/2011 e nº 709/2021, Manual de Redação da Presidência (URL oficial não respondeu)
 - [ ] Questões oficiais de provas anteriores: não importadas (exigem fonte e licença compatíveis)
@@ -70,7 +70,7 @@ Atualizado em 11/11/2026.
 - O limitador de tentativas de login é em memória.
 
 ## Próximas tarefas
-1. Cadastrar videoaulas verificadas (oEmbed) para os assuntos de maior peso.
+1. Ampliar videoaulas verificadas (oEmbed) para os assuntos do edital que ainda não têm vídeo (todas as aulas já têm).
 2. Ampliar o banco de questões nos assuntos sem questões (ver `docs/relatorios/lacunas.md`), priorizando Gerais.
 3. Verificar manualmente os atos do TRF3/CJF e cadastrá-los na biblioteca.
 4. Publicar em produção (Vercel + Neon) seguindo `docs/DEPLOY.md`.
