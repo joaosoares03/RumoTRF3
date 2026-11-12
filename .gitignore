@@ -14,3 +14,6 @@ next-env.d.ts
 .next-e2e
 .next-build
 e2e-saida.log
+.env.vercel
+.env.*
+!.env.example
