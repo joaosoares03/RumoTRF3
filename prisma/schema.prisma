@@ -1,0 +1,692 @@
+// Plataforma de estudos TRF3 2026
+// Schema portável entre SQLite (desenvolvimento local) e PostgreSQL (produção).
+// Por portabilidade, valores enumerados são String (validados com Zod em src/lib/validation.ts)
+// e listas/objetos são String contendo JSON.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ───────────────────────── Usuários e autenticação ─────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("USER") // USER | ADMIN
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sessions        Session[]
+  preferences     UserPreferences?
+  topicProgress   TopicProgress[]
+  subtopicChecks  SubtopicCheck[]
+  lessonProgress  LessonProgress[]
+  highlights      Highlight[]
+  notes           Note[]
+  answers         Answer[]
+  questionStates  QuestionUserState[]
+  simulados       Simulado[]
+  essays          Essay[]
+  flashcards      Flashcard[]
+  flashcardStates FlashcardState[]
+  reviewLogs      ReviewLog[]
+  plans           StudyPlan[]
+  tasks           StudyTask[]
+  sessionsStudy   StudySession[]
+  goals           WeeklyGoal[]
+  notifications   Notification[]
+  achievements    Achievement[]
+  labAttempts     LabAttempt[]
+  changeLogs      ContentChangeLog[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  userAgent String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model UserPreferences {
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  specialtyMode        String    @default("DEV") // DEV | SUP | AMBAS
+  activeSpecialty      String    @default("DEV") // DEV | SUP
+  dailyMinutes         Int       @default(120)
+  studyDays            String    @default("[1,2,3,4,5,6]") // JSON: 0=domingo..6=sábado
+  level                String    @default("INICIANTE") // INICIANTE | INTERMEDIARIO | AVANCADO
+  difficultDisciplines String    @default("[]") // JSON: slugs
+  masteredTopics       String    @default("[]") // JSON: ids de tópicos
+  objective            String    @default("")
+  planMode             String    @default("CICLO") // CICLO | FIXO
+  worksFullTime        Boolean   @default(false)
+  notificationsEnabled Boolean   @default(true)
+  pomodoroFocus        Int       @default(25)
+  pomodoroBreak        Int       @default(5)
+  onboardedAt          DateTime?
+  user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ───────────────────────── Concurso, edital e conteúdo programático ─────────────────────────
+
+model Exam {
+  id         String          @id @default(cuid())
+  code       String          @unique // TRF3-2026
+  name       String
+  board      String
+  examDate   DateTime
+  notes      String          @default("")
+  versions   EditalVersion[]
+  specialties Specialty[]
+  updates    OfficialUpdate[]
+  milestones ExamMilestone[]
+}
+
+model EditalVersion {
+  id          String   @id @default(cuid())
+  examId      String
+  number      String // 01/2026, 02/2026
+  title       String
+  url         String
+  publishedAt DateTime
+  summary     String
+  isCurrent   Boolean  @default(true)
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, number])
+}
+
+model ExamMilestone {
+  id     String   @id @default(cuid())
+  examId String
+  item   Int
+  title  String
+  start  DateTime
+  end    DateTime?
+  exam   Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+}
+
+model OfficialUpdate {
+  id          String   @id @default(cuid())
+  examId      String
+  title       String
+  summary     String
+  url         String
+  publishedAt DateTime
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+}
+
+model Specialty {
+  id           String       @id @default(cuid())
+  examId       String
+  code         String       @unique // 006 | 007
+  key          String       @unique // DEV | SUP
+  slug         String       @unique
+  name         String
+  shortName    String
+  vacancies    Int
+  vacancyNotes String       @default("")
+  duties       String // Anexo I
+  exam         Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
+  disciplines  Discipline[]
+  simulados    Simulado[]
+  labs         LabExercise[]
+}
+
+model Discipline {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  name        String
+  kind        String // GERAL | ESPECIFICA
+  specialtyId String? // null = conhecimento geral compartilhado entre as especialidades
+  order       Int
+  editalText  String // texto integral do edital para a disciplina
+  editalRef   String // ex.: "Edital 01/2026, Anexo VI, p. 51–52"
+  color       String     @default("#6366f1")
+  specialty   Specialty? @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
+  modules     Module[]
+  flashcards  Flashcard[]
+  sessions    StudySession[]
+  tasks       StudyTask[]
+  notes       Note[]
+
+  @@index([specialtyId])
+}
+
+model Module {
+  id           String     @id @default(cuid())
+  disciplineId String
+  slug         String     @unique
+  name         String
+  order        Int
+  discipline   Discipline @relation(fields: [disciplineId], references: [id], onDelete: Cascade)
+  topics       Topic[]
+}
+
+model Topic {
+  id          String  @id @default(cuid())
+  moduleId    String
+  slug        String  @unique
+  title       String // nome fiel ao edital
+  editalExcerpt String // trecho literal do edital
+  editalRef   String
+  order       Int
+  module      Module  @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  subtopics   Subtopic[]
+  lessons     Lesson[]
+  lessonCovers LessonCoverage[]
+  questions   Question[]
+  resources   ResourceTopic[]
+  flashcards  Flashcard[]
+  progress    TopicProgress[]
+  tasks       StudyTask[]
+  labs        LabExercise[]
+  notes       Note[]
+  sessions    StudySession[]
+}
+
+model Subtopic {
+  id      String          @id @default(cuid())
+  topicId String
+  title   String
+  order   Int
+  topic   Topic           @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  checks  SubtopicCheck[]
+}
+
+model TopicProgress {
+  id             String    @id @default(cuid())
+  userId         String
+  topicId        String
+  status         String    @default("NAO_INICIADO") // NAO_INICIADO | EM_ESTUDO | REVISANDO | DOMINADO
+  priority       Int       @default(2) // 1 alta, 2 média, 3 baixa
+  lastStudiedAt  DateTime?
+  lastReviewedAt DateTime?
+  nextReviewAt   DateTime?
+  reviewStage    Int       @default(0)
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic          Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, topicId])
+}
+
+model SubtopicCheck {
+  id         String   @id @default(cuid())
+  userId     String
+  subtopicId String
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subtopic   Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subtopicId])
+}
+
+// ───────────────────────── Aulas, materiais e biblioteca ─────────────────────────
+
+model Lesson {
+  id               String           @id @default(cuid())
+  topicId          String
+  slug             String           @unique
+  title            String
+  summary          String // resumo de revisão
+  content          String // markdown autoral
+  estimatedMinutes Int              @default(20)
+  authorship       String           @default("AUTORAL") // AUTORAL | OFICIAL | LICENCIADO
+  status           String           @default("PUBLICADO") // RASCUNHO | PUBLICADO
+  version          Int              @default(1)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  topic            Topic            @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  progress         LessonProgress[]
+  highlights       Highlight[]
+  notes            Note[]
+  covers           LessonCoverage[]
+}
+
+/// Assuntos adicionais do edital tratados pela aula (além do assunto principal).
+model LessonCoverage {
+  lessonId String
+  topicId  String
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  topic    Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([lessonId, topicId])
+}
+
+model LessonProgress {
+  id          String    @id @default(cuid())
+  userId      String
+  lessonId    String
+  completedAt DateTime?
+  lastReadAt  DateTime  @default(now())
+  favorite    Boolean   @default(false)
+  readCount   Int       @default(1)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson      Lesson    @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+}
+
+model Highlight {
+  id        String   @id @default(cuid())
+  userId    String
+  lessonId  String
+  text      String
+  note      String   @default("")
+  color     String   @default("amarelo")
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id           String      @id @default(cuid())
+  userId       String
+  disciplineId String?
+  topicId      String?
+  lessonId     String?
+  title        String
+  content      String
+  pinned       Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  discipline   Discipline? @relation(fields: [disciplineId], references: [id], onDelete: SetNull)
+  topic        Topic?      @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  lesson       Lesson?     @relation(fields: [lessonId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+}
+
+model Resource {
+  id                 String             @id @default(cuid())
+  title              String
+  url                String             @unique
+  type               String // VIDEO | DOCUMENTACAO | LEGISLACAO | ARTIGO | PDF | CURSO | NORMATIVO | FERRAMENTA
+  provider           String // ex.: MDN, Planalto, CNJ, Microsoft Learn
+  language           String             @default("pt-BR")
+  category           String             @default("COMPLEMENTAR") // OFICIAL | COMPLEMENTAR
+  license            String             @default("Acesso público — consultar termos do provedor")
+  description        String             @default("")
+  status             String             @default("EM_REVISAO") // EM_REVISAO | PUBLICADO | REJEITADO
+  verificationStatus String             @default("NAO_VERIFICADO") // NAO_VERIFICADO | VERIFICADO | QUEBRADO | INACESSIVEL
+  verificationMethod String             @default("")
+  httpStatus         Int?
+  verifiedAt         DateTime?
+  origin             String             @default("SEED") // SEED | IMPORTACAO | MANUAL
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  topics             ResourceTopic[]
+  checks             ResourceCheckLog[]
+}
+
+model ResourceTopic {
+  resourceId String
+  topicId    String
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  topic      Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@id([resourceId, topicId])
+}
+
+model ResourceCheckLog {
+  id         String   @id @default(cuid())
+  resourceId String
+  checkedAt  DateTime @default(now())
+  httpStatus Int?
+  ok         Boolean
+  method     String
+  message    String   @default("")
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+}
+
+model ContentChangeLog {
+  id        String   @id @default(cuid())
+  entity    String
+  entityId  String
+  action    String
+  details   String   @default("")
+  userId    String?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+// ───────────────────────── Questões ─────────────────────────
+
+model Question {
+  id          String              @id @default(cuid())
+  code        String              @unique
+  topicId     String
+  statement   String
+  difficulty  Int                 @default(2) // 1 fácil, 2 média, 3 difícil
+  origin      String              @default("AUTORAL") // AUTORAL | OFICIAL
+  board       String              @default("Treinamento (estilo Vunesp)")
+  year        Int?
+  explanation String
+  reference   String
+  status      String              @default("PUBLICADO") // RASCUNHO | EM_REVISAO | PUBLICADO
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  topic       Topic               @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  alternatives Alternative[]
+  answers     Answer[]
+  states      QuestionUserState[]
+  simuladoItems SimuladoItem[]
+
+  @@index([topicId])
+}
+
+model Alternative {
+  id          String   @id @default(cuid())
+  questionId  String
+  letter      String // A..E
+  text        String
+  isCorrect   Boolean
+  explanation String
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, letter])
+}
+
+model Answer {
+  id             String   @id @default(cuid())
+  userId         String
+  questionId     String
+  selectedLetter String
+  isCorrect      Boolean
+  timeSpentSec   Int      @default(0)
+  mode           String   @default("PRATICA") // PRATICA | SIMULADO | REVISAO | CRONOMETRADO
+  simuladoId     String?
+  createdAt      DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([userId, questionId])
+}
+
+model QuestionUserState {
+  id         String   @id @default(cuid())
+  userId     String
+  questionId String
+  favorite   Boolean  @default(false)
+  flagged    Boolean  @default(false)
+  note       String   @default("")
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+}
+
+// ───────────────────────── Simulados e redação ─────────────────────────
+
+model Simulado {
+  id               String         @id @default(cuid())
+  userId           String
+  specialtyId      String?
+  type             String // COMPLETO | RAPIDO | DISCIPLINA | ASSUNTO | PERSONALIZADO
+  title            String
+  status           String         @default("EM_ANDAMENTO") // EM_ANDAMENTO | FINALIZADO
+  timeLimitSec     Int
+  elapsedSec       Int            @default(0)
+  currentIndex     Int            @default(0)
+  includesEssay    Boolean        @default(false)
+  essayId          String?        @unique
+  startedAt        DateTime       @default(now())
+  finishedAt       DateTime?
+  correctGerais    Int?
+  totalGerais      Int?
+  correctEspec     Int?
+  totalEspec       Int?
+  scoreGerais      Float?
+  scoreEspec       Float?
+  objectiveScore   Float?
+  habilitado       Boolean?
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  specialty        Specialty?     @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
+  items            SimuladoItem[]
+  essay            Essay?         @relation(fields: [essayId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+}
+
+model SimuladoItem {
+  id             String   @id @default(cuid())
+  simuladoId     String
+  questionId     String
+  order          Int
+  section        String // GERAIS | ESPECIFICOS
+  selectedLetter String?
+  flagged        Boolean  @default(false)
+  isCorrect      Boolean?
+  simulado       Simulado @relation(fields: [simuladoId], references: [id], onDelete: Cascade)
+  question       Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([simuladoId, order])
+}
+
+model EssayPrompt {
+  id               String  @id @default(cuid())
+  slug             String  @unique
+  title            String
+  thematicPhrase   String
+  motivatingTexts  String // markdown autoral
+  instructions     String
+  axis             String // eixo temático
+  origin           String  @default("AUTORAL")
+  essays           Essay[]
+}
+
+model Essay {
+  id             String       @id @default(cuid())
+  userId         String
+  promptId       String?
+  title          String       @default("")
+  content        String       @default("")
+  wordCount      Int          @default(0)
+  lineEstimate   Int          @default(0)
+  status         String       @default("RASCUNHO") // RASCUNHO | FINALIZADA
+  timeSpentSec   Int          @default(0)
+  checklist      String       @default("{}") // JSON: itens do checklist marcados
+  selfScores     String       @default("{}") // JSON: autoavaliação por critério (A–D)
+  autoAnalysis   String       @default("") // JSON: análise heurística local
+  aiFeedback     String       @default("")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  prompt         EssayPrompt? @relation(fields: [promptId], references: [id], onDelete: SetNull)
+  simulado       Simulado?
+}
+
+// ───────────────────────── Flashcards e revisão espaçada ─────────────────────────
+
+model Flashcard {
+  id               String           @id @default(cuid())
+  ownerId          String? // null = baralho oficial da plataforma
+  disciplineId     String
+  topicId          String?
+  type             String           @default("BASICO") // BASICO | LACUNA | CODIGO
+  front            String
+  back             String
+  sourceQuestionId String?
+  createdAt        DateTime         @default(now())
+  owner            User?            @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  discipline       Discipline       @relation(fields: [disciplineId], references: [id], onDelete: Cascade)
+  topic            Topic?           @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  states           FlashcardState[]
+  logs             ReviewLog[]
+}
+
+model FlashcardState {
+  id             String    @id @default(cuid())
+  userId         String
+  flashcardId    String
+  easeFactor     Float     @default(2.5)
+  intervalDays   Int       @default(0)
+  repetitions    Int       @default(0)
+  lapses         Int       @default(0)
+  dueAt          DateTime  @default(now())
+  lastReviewedAt DateTime?
+  suspended      Boolean   @default(false)
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flashcard      Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, flashcardId])
+  @@index([userId, dueAt])
+}
+
+model ReviewLog {
+  id             String    @id @default(cuid())
+  userId         String
+  flashcardId    String
+  grade          Int // 0..5 (SM-2)
+  intervalBefore Int
+  intervalAfter  Int
+  reviewedAt     DateTime  @default(now())
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flashcard      Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+
+  @@index([userId, reviewedAt])
+}
+
+// ───────────────────────── Planejamento e sessões ─────────────────────────
+
+model StudyPlan {
+  id            String      @id @default(cuid())
+  userId        String
+  specialtyMode String
+  mode          String // CICLO | FIXO
+  startDate     DateTime
+  endDate       DateTime
+  dailyMinutes  Int
+  studyDays     String
+  active        Boolean     @default(true)
+  generatedAt   DateTime    @default(now())
+  params        String      @default("{}")
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks         StudyTask[]
+}
+
+model StudyTask {
+  id             String      @id @default(cuid())
+  planId         String?
+  userId         String
+  date           DateTime // dia (00:00 UTC do dia local)
+  disciplineId   String?
+  topicId        String?
+  type           String // TEORIA | QUESTOES | REVISAO | REDACAO | SIMULADO | FLASHCARDS | LABORATORIO
+  title          String
+  plannedMinutes Int
+  actualMinutes  Int         @default(0)
+  status         String      @default("PENDENTE") // PENDENTE | CONCLUIDA | PULADA
+  order          Int         @default(0)
+  rescheduled    Int         @default(0)
+  completedAt    DateTime?
+  manual         Boolean     @default(false)
+  plan           StudyPlan?  @relation(fields: [planId], references: [id], onDelete: Cascade)
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  discipline     Discipline? @relation(fields: [disciplineId], references: [id], onDelete: SetNull)
+  topic          Topic?      @relation(fields: [topicId], references: [id], onDelete: SetNull)
+
+  @@index([userId, date])
+}
+
+model StudySession {
+  id           String      @id @default(cuid())
+  userId       String
+  disciplineId String?
+  topicId      String?
+  type         String // POMODORO | LIVRE | AULA | QUESTOES | SIMULADO | REDACAO | FLASHCARDS
+  startedAt    DateTime
+  endedAt      DateTime
+  durationSec  Int
+  notes        String      @default("")
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  discipline   Discipline? @relation(fields: [disciplineId], references: [id], onDelete: SetNull)
+  topic        Topic?      @relation(fields: [topicId], references: [id], onDelete: SetNull)
+
+  @@index([userId, startedAt])
+}
+
+model WeeklyGoal {
+  id              String   @id @default(cuid())
+  userId          String
+  weekStart       DateTime
+  targetMinutes   Int
+  targetQuestions Int
+  targetReviews   Int      @default(0)
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekStart])
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  type      String // REVISAO | META | OFICIAL | SISTEMA | CONQUISTA
+  title     String
+  body      String
+  link      String?
+  dedupeKey String?
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dedupeKey])
+  @@index([userId, readAt])
+}
+
+model Achievement {
+  id         String   @id @default(cuid())
+  userId     String
+  code       String
+  unlockedAt DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, code])
+}
+
+// ───────────────────────── Laboratório prático ─────────────────────────
+
+model LabExercise {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  specialtyId String
+  topicId     String?
+  kind        String // SQL | CODIGO | COMANDO | CENARIO | CHAMADO
+  title       String
+  prompt      String // markdown
+  payload     String // JSON específico do tipo (schema SQL, passos do cenário etc.)
+  solution    String // explicação / gabarito
+  difficulty  Int          @default(2)
+  specialty   Specialty    @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
+  topic       Topic?       @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  attempts    LabAttempt[]
+}
+
+model LabAttempt {
+  id         String      @id @default(cuid())
+  userId     String
+  exerciseId String
+  correct    Boolean
+  answer     String
+  createdAt  DateTime    @default(now())
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise   LabExercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

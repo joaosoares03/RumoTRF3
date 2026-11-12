@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Identidade visual original: tinta profunda + acento "brasa" (vermelho-coral) + verde-água de apoio */
+:root {
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --surface-2: #f0eee9;
+  --border: #e4e1da;
+  --text: #17181c;
+  --muted: #6b6a66;
+  --accent: #e2483d;
+  --accent-soft: #fde8e5;
+  --accent-contrast: #ffffff;
+  --teal: #0f9f8f;
+  --teal-soft: #dcf4f0;
+  --amber: #c98a06;
+  --amber-soft: #fbf0d6;
+  --violet: #6d5bd0;
+  --success: #15935a;
+  --danger: #d23a3a;
+  --ring: rgba(226, 72, 61, 0.35);
+  --shadow: 0 1px 2px rgba(23, 24, 28, 0.04), 0 8px 24px -12px rgba(23, 24, 28, 0.12);
+}
+
+.dark {
+  --bg: #0c0d10;
+  --surface: #14161b;
+  --surface-2: #1b1e25;
+  --border: #262a33;
+  --text: #ecebe8;
+  --muted: #9b9a96;
+  --accent: #ff5d4f;
+  --accent-soft: #3a1714;
+  --accent-contrast: #ffffff;
+  --teal: #2fc7b4;
+  --teal-soft: #0f2d2a;
+  --amber: #f2b33d;
+  --amber-soft: #33270c;
+  --violet: #9a8cff;
+  --success: #34c27f;
+  --danger: #ff6464;
+  --ring: rgba(255, 93, 79, 0.4);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-violet: var(--violet);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "Cascadia Code", "Fira Code", Consolas, monospace;
+  --shadow-card: var(--shadow);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Conteúdo das aulas (Markdown) */
+.prose-study {
+  line-height: 1.75;
+  font-size: 1.02rem;
+}
+.prose-study h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  scroll-margin-top: 5rem;
+}
+.prose-study h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  scroll-margin-top: 5rem;
+}
+.prose-study p {
+  margin: 0.75rem 0;
+}
+.prose-study ul,
+.prose-study ol {
+  margin: 0.75rem 0;
+  padding-left: 1.4rem;
+}
+.prose-study ul {
+  list-style: disc;
+}
+.prose-study ol {
+  list-style: decimal;
+}
+.prose-study li {
+  margin: 0.25rem 0;
+}
+.prose-study strong {
+  font-weight: 650;
+}
+.prose-study blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  padding: 0.6rem 1rem;
+  border-radius: 0 10px 10px 0;
+  margin: 1rem 0;
+}
+.prose-study table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose-study th,
+.prose-study td {
+  border: 1px solid var(--border);
+  padding: 0.45rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-study th {
+  background: var(--surface-2);
+  font-weight: 600;
+}
+.prose-study code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--surface-2);
+  padding: 0.1rem 0.35rem;
+  border-radius: 5px;
+}
+.prose-study pre {
+  background: #0f1117;
+  color: #e6e6e6;
+  padding: 1rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.prose-study pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.prose-study a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+mark.hl {
+  background: color-mix(in srgb, var(--amber) 35%, transparent);
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* highlight.js — tema escuro minimalista */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in {
+  color: #ff7b72;
+}
+.hljs-string,
+.hljs-attr {
+  color: #a5d6ff;
+}
+.hljs-number,
+.hljs-literal {
+  color: #79c0ff;
+}
+.hljs-comment {
+  color: #8b949e;
+  font-style: italic;
+}
+.hljs-title,
+.hljs-function {
+  color: #d2a8ff;
+}
+.hljs-type,
+.hljs-class {
+  color: #ffa657;
+}
+
+@media print {
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+  body {
+    background: white;
+    color: black;
+  }
+}
